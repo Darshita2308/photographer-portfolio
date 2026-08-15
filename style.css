@@ -48,6 +48,8 @@ body, html {
     flex-direction: column;
     gap: 6px;
     cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
 }
 
 .menu-icon span {
@@ -55,6 +57,101 @@ body, html {
     width: 24px;
     height: 2px;
     background-color: #ffffff;
+    transition: background-color 0.2s;
+}
+
+.menu-icon:hover span {
+    background-color: #ff7a00;
+}
+
+/* --- HALF-SIDE SLIDE-OUT DRAWER --- */
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 999;
+}
+
+.drawer-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.side-drawer {
+    position: fixed;
+    top: 0;
+    right: -50%; /* Hidden off-screen to the right */
+    width: 50%; /* Half side width */
+    height: 100%;
+    background-color: #121212;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 3rem;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+}
+
+.side-drawer.open {
+    right: 0; /* Slides into view */
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.drawer-title {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: #888888;
+    text-transform: uppercase;
+}
+
+.close-btn {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #ffffff;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #ff7a00;
+}
+
+.drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.drawer-link {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 400;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.drawer-link:hover {
+    color: #ff7a00;
+    transform: translateX(8px);
 }
 
 /* Hero Content Layout */
@@ -580,7 +677,7 @@ body, html {
     color: #ff7a00;
 }
 
-/* --- FINAL CONTACT / FOOTER SECTION --- */
+/* --- FINAL CONTACT SECTION --- */
 .final-contact-section {
     position: relative;
     width: 100%;
@@ -608,7 +705,6 @@ body, html {
     overflow: hidden;
 }
 
-/* Shutter Badge */
 .shutter-badge {
     display: flex;
     justify-content: center;
@@ -634,7 +730,6 @@ body, html {
     letter-spacing: 0.5px;
 }
 
-/* Email text */
 .contact-email {
     font-size: clamp(2rem, 4.5vw, 3.8rem);
     font-weight: 500;
@@ -648,7 +743,6 @@ body, html {
     opacity: 0.8;
 }
 
-/* Social links */
 .contact-socials {
     display: flex;
     gap: 2rem;
@@ -668,8 +762,13 @@ body, html {
     opacity: 0.7;
 }
 
-/* --- RESPONSIVE MEDIA QUERIES FOR MOBILE PHONES --- */
+/* --- RESPONSIVE MEDIA QUERIES --- */
 @media (max-width: 768px) {
+    .side-drawer {
+        width: 80%; /* Takes up more space on mobile phones */
+        right: -80%;
+    }
+
     .hero-container {
         padding: 1.5rem;
     }
@@ -725,4 +824,260 @@ body, html {
     background: linear-gradient(135deg, #ff7a00 0%, #ffaa33 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+/* --- RAILWAY JOURNEY PAGE STYLES --- */
+.journey-body {
+    background-color: #070707;
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+}
+
+.journey-hero {
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.journey-title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 500;
+    letter-spacing: -2px;
+    margin-bottom: 1rem;
+}
+
+.journey-subtitle {
+    color: #999999;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+/* Railway Track Container */
+.railway-section {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem 10rem;
+}
+
+/* Vertical glowing train track line */
+.rail-track {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #ff7a00 0%, #ffaa33 50%, rgba(255, 122, 0, 0.2) 100%);
+    box-shadow: 0 0 15px rgba(255, 122, 0, 0.5);
+}
+
+.stations-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+}
+
+/* Glassmorphism Railway Station Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 3rem;
+    width: 45%;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 122, 0, 0.4);
+}
+
+/* Alternate left and right positioning like railway stops */
+.station-card:nth-child(odd) {
+    align-self: flex-start;
+}
+
+.station-card:nth-child(even) {
+    align-self: flex-end;
+}
+
+/* Station Marker Node */
+.station-marker {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ff7a00 0%, #ffaa33 100%);
+    color: #0b0b0b;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(255, 122, 0, 0.6);
+    border: 4px solid #070707;
+    z-index: 10;
+}
+
+.station-card:nth-child(odd) .station-marker {
+    right: -78.5px;
+}
+
+.station-card:nth-child(even) .station-marker {
+    left: -78.5px;
+}
+
+.station-year {
+    font-size: 0.8rem;
+    color: #ffaa33;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.station-content h2 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.station-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #aaaaaa;
+    font-weight: 300;
+}
+
+/* Mobile Responsiveness for Journey Page */
+@media (max-width: 768px) {
+    .rail-track {
+        left: 30px;
+    }
+
+    .glass-card {
+        width: 85%;
+        align-self: flex-end !important;
+        padding: 2rem 1.5rem;
+    }
+
+    .station-card:nth-child(odd) .station-marker,
+    .station-card:nth-child(even) .station-marker {
+        left: -58.5px;
+        right: auto;
+    }
+}
+/* --- SCROLL ANIMATED TRAIN ON RAIL TRACK --- */
+.rail-track {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #ff7a00 0%, #ffaa33 50%, rgba(255, 122, 0, 0.2) 100%);
+    box-shadow: 0 0 15px rgba(255, 122, 0, 0.5);
+}
+
+.scroll-train {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 0%;
+    z-index: 20;
+    transition: top 0.1s ease-out; /* Smooth momentum glide */
+}
+
+.train-cabin {
+    width: 40px;
+    height: 40px;
+    background-color: #ff7a00;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: 0 0 20px #ff7a00, 0 0 40px rgba(255, 122, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+    .scroll-train {
+        left: 30px;
+    }
+}
+/* --- BACK TO PORTFOLIO LINK STYLING --- */
+.back-portfolio-link {
+    color: #ff7a00;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: opacity 0.2s ease;
+}
+
+.back-portfolio-link:hover {
+    opacity: 0.8;
+}
+
+/* --- SCROLL ANIMATED TRAIN ON RAIL TRACK --- */
+.railway-section {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem 10rem;
+}
+
+.rail-track {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #ff7a00 0%, #ffaa33 50%, rgba(255, 122, 0, 0.2) 100%);
+    box-shadow: 0 0 15px rgba(255, 122, 0, 0.5);
+}
+
+.scroll-train {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 0%;
+    z-index: 20;
+    will-change: top;
+}
+
+.train-cabin {
+    width: 45px;
+    height: 45px;
+    background-color: #ff7a00;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    box-shadow: 0 0 20px #ff7a00, 0 0 40px rgba(255, 122, 0, 0.8);
+}
+
+@media (max-width: 768px) {
+    .rail-track {
+        left: 30px;
+    }
+    .scroll-train {
+        left: 30px;
+    }
 }

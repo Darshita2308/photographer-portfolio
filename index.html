@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,10 +10,11 @@
 <body>
 
     <!-- Hero Section -->
-    <div class="hero-container">
+    <div class="hero-container" id="home">
         <header class="navbar">
             <div class="logo">Finnegan</div>
-            <div class="menu-icon">
+            <!-- Working Menu Button -->
+            <div class="menu-icon" id="menuBtn">
                 <span></span>
                 <span></span>
             </div>
@@ -22,7 +23,7 @@
         <main class="hero-content">
             <div class="hero-top-right">
                 <p>HI, FINNEGAN MONROE HERE. I'M A FREELANCE PHOTOGRAPHER IN NY AND THE SHUTTERBUG CAPTURING LIFE'S MAGICAL MOMENTS ONE CLICK AT A TIME.</p>
-                <a href="#template" class="get-template-btn">GET TEMPLATE <span class="arrow">&rarr;</span></a>
+                
             </div>
 
             <h1 class="hero-heading">
@@ -38,8 +39,25 @@
         </main>
     </div>
 
+    <!-- Slide-out Half-Side Drawer Menu -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="side-drawer" id="sideDrawer">
+        <div class="drawer-header">
+            <span class="drawer-title">Navigation</span>
+            <div class="close-btn" id="closeBtn">&times;</div>
+        </div>
+        <nav class="drawer-links">
+            <a href="#home" class="drawer-link">Home</a>
+            <a href="#stats" class="drawer-link">Overview & Stats</a>
+            <a href="#albums" class="drawer-link">Albums</a>
+            <a href="#expertise" class="drawer-link">My Expertise</a>
+            <a href="#faq" class="drawer-link">FAQ Frenzy</a>
+            <a href="#contact" class="drawer-link">Let's Talk</a>
+        </nav>
+    </div>
+
     <!-- Stats Section -->
-    <section class="stats-section">
+    <section class="stats-section" id="stats">
         <div class="stats-grid">
             <div class="stat-card">
                 <span class="stat-label">Hours Behind the Lens</span>
@@ -67,14 +85,14 @@
             <p class="bio-text">
                 a passionate photographer dedicated to capturing life's most precious moments. With a keen eye for detail and a <span class="gradient-text">love for storytelling</span>, I strive to create images that are not just beautiful, but that also evoke emotion and tell a compelling story.
             </p>
-            <a href="#about" class="more-about-btn">
+            <a href="about.html" target="_blank" class="more-about-btn">
                 MORE ABOUT ME <span class="arrow">&rarr;</span>
             </a>
         </div>
     </section>
 
     <!-- Albums Section -->
-    <section class="albums-section">
+    <section class="albums-section" id="albums">
         <div class="albums-sticky-header">
             <h2 class="albums-title">Albums</h2>
         </div>
@@ -127,7 +145,7 @@
     </section>
 
     <!-- My Expertise Section -->
-    <section class="expertise-section">
+    <section class="expertise-section" id="expertise">
         <div class="expertise-sticky-header">
             <h2 class="expertise-title">My Expertise</h2>
         </div>
@@ -170,7 +188,7 @@
     </section>
 
     <!-- FAQ Frenzy Section -->
-    <section class="faq-section">
+    <section class="faq-section" id="faq">
         <div class="faq-wrapper">
             <div class="faq-header-side">
                 <h2 class="faq-main-title">FAQ<br><span class="gradient-text">Frenzy:</span></h2>
@@ -271,18 +289,15 @@
         </div>
     </section>
 
-    <!-- Final Contact / Footer Page Section -->
-    <section class="final-contact-section">
+    <!-- Final Contact Section -->
+    <section class="final-contact-section" id="contact">
         <div class="contact-card-banner">
-            <!-- Shutter Badge -->
             <div class="shutter-badge">
                 <div class="shutter-circle">
                     <span>Let's Talk</span>
                 </div>
             </div>
-            <!-- Email -->
             <a href="mailto:finnegan@email.com" class="contact-email">finnegan@email.com</a>
-            <!-- Social Links -->
             <div class="contact-socials">
                 <a href="#">Instagram</a>
                 <a href="#">Facebook</a>
@@ -292,10 +307,31 @@
         </div>
     </section>
 
-    <!-- JavaScript for Accordion Toggle -->
+    <!-- JavaScript for Menu Drawer & Accordion -->
     <script>
-        const faqItems = document.querySelectorAll('.faq-item');
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const sideDrawer = document.getElementById('sideDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const drawerLinks = document.querySelectorAll('.drawer-link');
 
+        function toggleDrawer() {
+            sideDrawer.classList.toggle('open');
+            drawerOverlay.classList.toggle('open');
+        }
+
+        menuBtn.addEventListener('click', toggleDrawer);
+        closeBtn.addEventListener('click', toggleDrawer);
+        drawerOverlay.addEventListener('click', toggleDrawer);
+
+        drawerLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                sideDrawer.classList.remove('open');
+                drawerOverlay.classList.remove('open');
+            });
+        });
+
+        const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {

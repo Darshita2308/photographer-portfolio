@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Behind the Lens — Finnegan Monroe</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="journey-body">
+
+    <!-- Top Navigation -->
+    <header class="navbar">
+        <a href="index.html" class="back-portfolio-link">← BACK TO PORTFOLIO</a>
+    </header>
+
+    <!-- Journey Header -->
+    <section class="journey-hero">
+        <h1 class="journey-title">My Creative <span class="gradient-text">Journey</span></h1>
+        <p class="journey-subtitle">Scroll down to travel through the major stations and milestones of my photography career.</p>
+    </section>
+
+    <!-- Railway Timeline Track Section -->
+    <section class="railway-section" id="railwaySection">
+        <div class="rail-track" id="railTrack">
+            <!-- Animated Train running on the track -->
+            <div class="scroll-train" id="scrollTrain">
+                <div class="train-cabin">🚂</div>
+            </div>
+        </div>
+
+        <div class="stations-container">
+            <!-- Station 1 -->
+            <div class="station-card glass-card">
+                <div class="station-marker">01</div>
+                <div class="station-content">
+                    <span class="station-year">2011 — Station Departure</span>
+                    <h2>The First Click</h2>
+                    <p>It all started with an old mechanical film camera gifted by my grandfather. Walking through empty alleyways, I learned the magic of waiting for the right light and framing a raw emotion before it vanished forever.</p>
+                </div>
+            </div>
+
+            <!-- Station 2 -->
+            <div class="station-card glass-card">
+                <div class="station-marker">02</div>
+                <div class="station-content">
+                    <span class="station-year">2015 — Junction City</span>
+                    <h2>The Urban Chaos</h2>
+                    <p>Moving to New York City was a sensory explosion. The subway lights, rushing crowds, and midnight neon signs shaped my style into moody, cinematic street photography where every stranger had a profound story.</p>
+                </div>
+            </div>
+
+            <!-- Station 3 -->
+            <div class="station-card glass-card">
+                <div class="station-marker">03</div>
+                <div class="station-content">
+                    <span class="station-year">2018 — Express Terminal</span>
+                    <h2>Studio & Shadows</h2>
+                    <p>Stepping into controlled studio environments taught me precision. Sculpting portraits with shadows, softboxes, and high-end editorial concepts transformed how I capture human character and corporate branding.</p>
+                </div>
+            </div>
+
+            <!-- Station 4 -->
+            <div class="station-card glass-card">
+                <div class="station-marker">04</div>
+                <div class="station-content">
+                    <span class="station-year">2022 — Global Express</span>
+                    <h2>The Worldwide Lens</h2>
+                    <p>From drone photography over emerald coastlines to covering global documentary assignments, my camera became my passport. Exhibitions in 15 galleries cemented my dedication to visual storytelling.</p>
+                </div>
+            </div>
+
+            <!-- Station 5 -->
+            <div class="station-card glass-card">
+                <div class="station-marker">05</div>
+                <div class="station-content">
+                    <span class="station-year">Present & Beyond</span>
+                    <h2>The Infinite Shutter</h2>
+                    <p>Today, as an independent freelance photographer, the journey never stops. Every new project is a fresh track heading into uncharted artistic territories. Let’s build the next chapter together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll Train Animation Script -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const railwaySection = document.getElementById('railwaySection');
+            const scrollTrain = document.getElementById('scrollTrain');
+
+            const rect = railwaySection.getBoundingClientRect();
+            const sectionHeight = railwaySection.offsetHeight;
+            const windowHeight = window.innerHeight;
+
+            // Compute how far we have scrolled relative to the railway section container
+            let scrollDistance = windowHeight - rect.top;
+            let totalScrollable = sectionHeight + windowHeight;
+            let progress = scrollDistance / totalScrollable;
+
+            // Clamp progress strictly between 0 and 1
+            progress = Math.max(0, Math.min(1, progress));
+
+            // Move train down along the track length (0% to 100%)
+            scrollTrain.style.top = (progress * 100) + '%';
+        });
+    </script>
+</body>
+</html>
